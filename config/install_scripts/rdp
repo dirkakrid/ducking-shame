@@ -1,0 +1,9 @@
+#!/bin/env bash
+PACKAGES="xorg-xauth dwm dmenu xterm weechat elinks"
+CONFIG="./config/rdp"
+
+pacman -r ${INSTALL_DIR} pacman -Syu ${PACKAGES}
+cp -af ${CONFIG}/* ${INSTALL_DIR}
+
+chown -R spareproject:users ${INSTALL_DIR}/home/spareproject/
+chmod -R 700 ${INSTALL_DIR}/home/spareproject

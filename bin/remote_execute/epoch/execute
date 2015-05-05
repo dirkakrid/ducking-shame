@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+case ${1} in 
+  true)
+    echo "true generating all the foo"
+  ;;
+  false)
+    echo "false providing old information"
+  ;;
+esac

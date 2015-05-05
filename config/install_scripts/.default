@@ -1,0 +1,50 @@
+#!/bin/env bash
+PACKAGES="systemd pacman bash iproute2 openssh sshfs vim-minimal tmux htop sed"
+CONFIG="./config/default"
+
+pacman -r ${INSTALL_DIR} --noconfirm -Syu ${PACKAGES}
+cp -af ${CONFIG}/* ${INSTALL_DIR}
+chroot ${INSTALL_DIR} locale-gen
+chroot ${INSTALL_DIR} ln -sf /usr/share/zoneinfo/UTC /etc/localtime
+chroot ${INSTALL_DIR} chmod -R 700 /etc/iptables
+chroot ${INSTALL_DIR} chmod -R 700 /boot
+echo ${NODE} > ${INSTALL_DIR}/etc/hostname
+
+chroot ${INSTALL_DIR} passwd -l root
+chroot ${INSTALL_DIR} useradd -g users -s /bin/bash spareproject
+
+SPAREPROJECT=""
+while [[ ${#SPAREPROJECT} -lt 1000 ]];do
+SPAREPROJECT+=`cat /dev/random | fold -w 1024 | head -n 1`
+done
+SPAREPROJECT=`echo ${SPAREPROJECT} | sha512sum | sed -r 's/...$//'`
+sed -i "s/spareproject:\!/spareproject:\$6\$rounds=65536\$$SPAREPROJECT/g" ${INSTALL_DIR}/etc/shadow
+unset SPAREPROJECT
+
+ssh-keygen -t rsa -b 4096 -f ${INSTALL_DIR}/home/spareproject/sshd/ssh_host_rsa_key -N ""
+ssh-keygen -t rsa -b 4096 -C "spareproject@container" -f ${INSTALL_DIR}/home/spareproject/.ssh/id_rsa -N ""
+cat /home/spareproject/.ssh/id_rsa.pub >> ${INSTALL_DIR}/home/spareproject/.ssh/authorized_keys
+cat /home/admin/.ssh/id_rsa.pub >> ${INSTALL_DIR}/home/spareproject/.ssh/authorized_keys
+
+chroot ${INSTALL_DIR} chmod -R 700 /root
+chroot ${INSTALL_DIR} chmod -R 700 /home/spareproject
+chroot ${INSTALL_DIR} chown -R spareproject:users /home/spareproject/
+
+chroot ${INSTALL_DIR} systemctl enable systemd-networkd.service
+chroot ${INSTALL_DIR} systemctl enable iptables.service
+chroot ${INSTALL_DIR} systemctl enable ip6tables.service
+chroot ${INSTALL_DIR} systemctl enable sshd-spareproject.service
+
+curl -o ${INSTALL_DIR}/etc/pacman.d/mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=https&use_mirror_status=on'
+sed -i 's/#Server/Server/g' ${INSTALL_DIR}/etc/pacman.d/mirrorlist
+
+cp -ar /etc/pacman.d/gnupg ${INSTALL_DIR}/etc/pacman.d/gnupg
+#chroot ${INSTALL_DIR} pacman-key --init
+#chroot ${INSTALL_DIR} pacman-key --populate archlinux
+#chroot ${INSTALL_DIR} pacman-key --refresh-keys
+
+if [[ -f /usr/bin/pinentry ]];then
+  rm /usr/bin/pinentry
+  chroot ${INSTALL_DIR} ln -s /usr/bin/pinentry-curses /usr/bin/pinentry
+fi 
+

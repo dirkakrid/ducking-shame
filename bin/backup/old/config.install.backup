@@ -1,0 +1,166 @@
+#!/bin/bash
+##########################################################################################################################################################################################
+. /mnt/container/config.variables
+##########################################################################################################################################################################################
+function default(){
+DEFAULT="openssh sshfs vim-minimal tmux htop sudo dnscrypt-proxy tor torsocks"
+DEFAULT_DIR="./config/default"
+
+if [[ ! -d ${ROOTFS} ]];then
+mkdir ${ROOTFS}
+HOSTNAME=${NODE}
+
+echo creating dir
+
+mkdir -p ${ROOTFS}var/lib/pacman
+sleep 1
+
+pacman -r ${ROOTFS} -Syu systemd pacman bash iproute2 ${DEFAULT}
+cp -af ${DEFAULT_DIR}/* ${ROOTFS}
+
+chroot ${ROOTFS} locale-gen
+chroot ${ROOTFS} loadkeys uk
+chroot ${ROOTFS} setfont Lat2-Terminus16
+chroot ${ROOTFS} ln -sf /usr/share/zoneinfo/UTC /etc/localtime
+chroot ${ROOTFS} chmod -R 700 /etc/sudoers
+chroot ${ROOTFS} chmod -R 700 /etc/sudoers.d
+chroot ${ROOTFS} chmod -R 700 /etc/iptables
+chroot ${ROOTFS} chmod -R 700 /boot
+echo ${HOSTNAME} > ${ROOTFS}etc/hostname
+
+chroot ${ROOTFS} useradd -g users -s /bin/bash spareproject
+chroot ${ROOTFS} useradd -g wheel -s /bin/bash admin
+chroot ${ROOTFS} groupadd sshd
+chroot ${ROOTFS} useradd -g sshd -s /bin/bash sshd
+chroot ${ROOTFS} useradd -g storage -s /bin/false storage
+#chroot ${ROOTFS} passwd -l root
+
+#GROUPS
+chroot ${ROOTFS} gpasswd -a admin systemd-journal
+chroot ${ROOTFS} gpasswd -a admin storage
+chroot ${ROOTFS} gpasswd -a spareproject storage
+chroot ${ROOTFS} gpasswd -a sshd storage
+
+#PASSWORDS
+SPAREPROJECT=`cat /dev/random | fold -w 1024 | head -n 1 | sha512sum | sed -r 's/...$//'`
+ADMIN=`cat /dev/random | fold -w 1024 | head -n 1 | sha512sum | sed -r 's/...$//'`
+SSHD=`cat /dev/random | fold -w 1024 | head -n 1 | sha512sum | sed -r 's/...$//'`
+sed -i "s/spareproject:\!/spareproject:\$6\$rounds=65536\$$SPAREPROJECT/g" ${ROOTFS}etc/shadow
+sed -i "s/admin:\!/admin:\$6\$rounds=65536\$$ADMIN/g" ${ROOTFS}etc/shadow
+sed -i "s/sshd:\!/sshd:\$6\$rounds=65536\$$SSHD/g" ${ROOTFS}etc/shadow
+unset SPAREPROJECT
+unset ADMIN
+unset SSHD
+
+if [[ /usr/bin/pinentry ]];then
+  rm /usr/bin/pintentry
+  ln -s /usr/bin/pinentry-curses /usr/bin/pinentry
+else
+  ln -s /usr/bin/pinentry-curses /usr/bin/pinentry
+fi
+
+ssh-keygen -t rsa -b 4096 -f ${ROOTFS}home/sshd/ssh_host_rsa_key -N ""
+ssh-keygen -t rsa -b 4096 -C "sshd@container" -f ${ROOTFS}home/sshd/.ssh/id_rsa -N ""
+echo -n 'command="/home/sshd/commands.sh \ " ' >> ${ROOTFS}home/sshd/.ssh/authorized_keys
+echo | cat /home/admin/.ssh/id_rsa.pub >> ${ROOTFS}home/sshd/.ssh/authorized_keys
+echo -n 'command="/home/sshd/commands.sh \ " ' >> ${ROOTFS}home/sshd/.ssh/authorized_keys
+echo | cat /home/spareproject/.ssh/id_rsa.pub >> ${ROOTFS}home/sshd/.ssh/authorized_keys
+
+ssh-keygen -t rsa -b 4096 -f ${ROOTFS}home/spareproject/sshd/ssh_host_rsa_key -N ""
+ssh-keygen -t rsa -b 4096 -C "spareproject@container" -f ${ROOTFS}home/spareproject/.ssh/id_rsa -N ""
+cat /home/spareproject/.ssh/id_rsa.pub >> ${ROOTFS}/home/spareproject/.ssh/authorized_keys
+cat /home/admin/.ssh/id_rsa.pub >> ${ROOTFS}home/spareproject/.ssh/authorized_keys
+ssh-keygen -t rsa -b 4096 -f ${ROOTFS}home/admin/sshd/ssh_host_rsa_key -N ""
+ssh-keygen -t rsa -b 4096 -C "admin@container" -f ${ROOTFS}home/admin/.ssh/id_rsa -N ""
+cat /home/admin/.ssh/id_rsa.pub >> ${ROOTFS}home/admin/.ssh/authorized_keys
+
+chroot ${ROOTFS} chown -R spareproject:users /home/spareproject/
+chroot ${ROOTFS} chown -R admin:wheel /home/admin
+chroot ${ROOTFS} chown -R sshd:sshd /home/sshd
+chroot ${ROOTFS} chown -R storage:storage /home/storage
+chroot ${ROOTFS} chmod -R 700 /home/spareproject
+chroot ${ROOTFS} chmod -R 700 /home/admin
+chroot ${ROOTFS} chmod -R 700 /home/sshd
+chroot ${ROOTFS} chmod -R 750 /home/storage
+chroot ${ROOTFS} chmod -R 700 /root
+chroot ${ROOTFS} systemctl enable systemd-networkd.service
+chroot ${ROOTFS} systemctl enable iptables.service
+chroot ${ROOTFS} systemctl enable ip6tables.service
+#chroot ${ROOTFS} systemctl enable sshd-server-keys.service
+chroot ${ROOTFS} systemctl enable sshd.service
+chroot ${ROOTFS} systemctl enable sshd-spareproject.service
+chroot ${ROOTFS} systemctl enable sshd-admin.service
+chroot ${ROOTFS} systemctl enable dnscrypt-proxy
+else
+  echo "directory exists fix it from view its your data and previous overlayfs and rootfs will be wiped"
+fi
+}
+##########################################################################################################################################################################################
+
+##########################################################################################################################################################################################
+function rdp() {
+RDP="xorg-xauth dwm dmenu feh conky terminator weechat"
+RDP_DIR="./config/rdp"
+
+pacman -r ${ROOTFS} pacman -Syu ${RDP}
+cp -af ${RDP_DIR}/* ${ROOTFS}
+
+chroot ${ROOTFS} chown -R spareproject:users /home/spareproject
+chroot ${ROOTFS} chown -R admin:wheel /home/admin
+chroot ${ROOTFS} chmod -R 700 /home/spareproject
+chroot ${ROOTFS} chmod -R 700 /home/admin
+
+chroot ${ROOTFS} systemctl enable conky.service
+}
+##########################################################################################################################################################################################
+function web() {
+WEB="nginx fcgiwrap"
+WEB_DIR="./config/web"
+pacman -r ${ROOTFS}  pacman -Syu ${WEB}
+cp -af ${WEB_DIR}/* ${ROOTFS}
+
+chroot ${ROOTFS} groupadd nginx
+chroot ${ROOTFS} groupadd cgi
+chroot ${ROOTFS} useradd -g nginx -s /bin/false nginx
+chroot ${ROOTFS} useradd -g cgi -s /bin/false cgi
+chroot ${ROOTFS} gpasswd -a cgi nginx
+chroot ${ROOTFS} gpasswd -a nginx cgi
+#openssl genrsa -des3 -out ${INSTALL_DIR}/home/nginx/keys/server.key 4096
+#openssl req -new -key ${INSTALL_DIR}/home/nginx/keys/server.key -out /home/nginx/keys/server.csr
+#cp ${INSTALL_DIR}/home/nginx/keys/server.key ${INSTALL_DIR}/home/nginx/keys/server.key.org
+#openssl rsa -in ${INSTALL_DIR}/home/nginx/keys/server.key.org -out ${INSTALL_DIR}/home/nginx/keys/server.key
+#openssl x509 -req -days 365 -in ${INSTALL_DIR}/home/nginx/keys/server.csr -signkey ${INSTALL_DIR}/home/nginx/keys/server.key -out ${INSTALL_DIR}/home/nginx/keys/server.crt
+chroot ${ROOTFS} chown -R nginx:nginx /home/nginx
+chroot ${ROOTFS} chown -R nginx:nginx /var/lib/nginx
+chroot ${ROOTFS} chown -R cgi:cgi /home/nginx/webpanel/cgi-bin
+chroot ${ROOTFS} chmod -R 750 /home/nginx
+chroot ${ROOTFS} systemctl enable nginx.service
+chroot ${ROOTFS} systemctl enable fcgiwrap.socket
+}
+##########################################################################################################################################################################################
+function dns() {
+  DNS="unbound expat dnscrypt-proxy tor torsocks dnsutils"
+  DNS_DIR="./config/dns"
+  pacman -r ${ROOTFS} -Syu ${DNS}
+  cp -af ${DNS_DIR}/* ${ROOTFS}
+  chroot ${ROOTFS} systemctl enable unbound.service
+  chroot ${ROOTFS} systemctl enable dnscrypt-proxy.service
+  chroot ${ROOTFS} chown -R unbound:unbound /etc/unbound/keys
+}
+
+function tor() {
+  TOR="tor torsocks"
+  TOR_DIR="./config/tor"
+  pacman -r ${ROOTFS} -Syu ${TOR}
+  cp -af ${TOR_DIR}/* ${ROOTFS}
+}
+#########################################################################################################################################################################################
+
+default
+#tor
+#dns
+rdp
+#web
+#router
+
+

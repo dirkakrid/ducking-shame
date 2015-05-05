@@ -1,0 +1,31 @@
+
+
+general notes
+
+qemu-img resize image +/-size
+resize2fs /mnt/container/rawfs/image
+
+it worked /shrug
+
+^ problems
+you have to unmount the raw image and remount the raw image before resizefs will work
+
+lvextend has some funky voodoo that allows resizing /dev/mapper but its pointing to /dev/sdXY 
+not to a raw image so i didnt really want to test it and assume it just doesnt work
+
+my original test case was an anon upload ftp server with a restricted file size
+the plan leave it up if its full increase the raw image size whilst still allowing read access but meh 
+
+also 
+
+cryptsetup close mapper_name 
+^ 
+ive been writting every in a one way direction
+
+quick and easy throw 
+
+manual removal 
+
+mostly because i dont want to have to maintain a database with the current state of every dir raw image folder nspawn container etc
+
+i will do it eventually but liveusb tends to mean its pretty pointless 

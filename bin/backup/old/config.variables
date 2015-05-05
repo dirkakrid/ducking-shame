@@ -1,0 +1,29 @@
+#!/bin/env bash
+clear; cat /etc/banner
+##########################################################################################################################################################################################
+if [[ ${1} && ${2} ]];then
+ROOTFS=/mnt/container/rootfs/${1}.rootfs
+OVERLAYFS=/mnt/container/overlayfs/${1}.${2}
+UNIONFS=/var/lib/container/${1}.${2}
+NODE=${1}.${2}
+echo "
+DEBUGGERY: ${1} ${2}
+ROOTFS: ${ROOTFS}
+OVERLAYFS: ${OVERLAYFS}
+UNIONFS: ${UNIONFS}
+NODE: ${NODE}
+"
+elif [[ ${1} ]];then
+ROOTFS=/mnt/container/rootfs/${1}.rootfs
+NODE=${1}.rootfs
+echo "
+DEBUGGERY: ${1}
+ROOTFS: ${ROOTFS}
+NODE: ${NODE}
+"
+else
+echo "not now..."
+fi
+##########################################################################################################################################################################################
+
+

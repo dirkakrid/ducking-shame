@@ -1,0 +1,6 @@
+#!/bin/env bash
+PACKAGES="base-devel abs arch-install-scripts xmlto docbook-xml inetutils bc"
+CONFIG="./config/dev"
+
+pacman -r ${INSTALL_DIR} pacman -Syu ${PACKAGES}
+#cp -ar ${CONFIG}/* ${INSTALL_DIR} 

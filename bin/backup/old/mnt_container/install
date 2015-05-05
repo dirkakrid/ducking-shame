@@ -1,0 +1,101 @@
+#!/bin/bash
+#########################################################################################################################################################################################
+function usage {
+cat << EOF
+${0} - help
+-r rootfs     rootfs directory
+-o overlayfs  overlayfs directory
+-b base       base images for rootfs
+-i install    install scripts for overlayfs or rootfs
+EOF
+if [[ ${2} ]];then printf "%s\n" "${2}";fi
+exit ${1}
+}
+##########################################################################################################################################################################################
+BASE=".default"
+##########################################################################################################################################################################################
+while getopts 'r:o:i:b:h' arg;do
+case ${arg} in
+r)
+ROOTFS="${OPTARG}"
+ROOTFS_+="${ROOTFS}"
+;;
+o)
+OVERLAYFS="${ROOTFS}.${OPTARG}"
+OVERLAYFS_+="${OVERLAYFS}"
+;;
+i)
+INSTALL="${OPTARG}"
+;;
+b)
+BASE=".${OPTARG}"
+;;
+h) usage 0;;
+*) usage 1;;
+esac
+done
+##########################################################################################################################################################################################
+function function_check {
+AVAILABLE=$(ls ./config/install_scripts/)
+for i in ${INSTALL};do
+PASS=""
+for o in ${AVAILABLE};do
+if [[ ${i} == ${o} ]];then PASS="true";fi
+done
+if [[ ${PASS} != "true" ]];then usage 1 "function doesnt exist";fi
+done
+}
+function base_check {
+AVAILABLE=$(ls -a ./config/install_scripts | grep "^\.")
+PASS=""
+for i in ${AVAILABLE};do if [[ ${i} == ${BASE} ]];then PASS="true";fi;done
+if [[ ${PASS} != "true" ]];then usage 1 "base doesnt exist";fi
+}
+##########################################################################################################################################################################################
+function debuggery {
+cat << EOF
+debuggery...
+ROOTFS:       ${ROOTFS}
+ROOTFS_:      ${ROOTFS_}
+OVERLAYFS:    ${OVERLAYFS}
+OVERLAYFS_:   ${OVERLAYFS_}
+MOUNT_:       ${MOUNT_}
+INSTALL:      ${INSTALL}
+NODE:         ${NODE}
+INSTALL_DIR:  ${INSTALL_DIR}
+EOF
+}
+##########################################################################################################################################################################################
+if [[ ! -z ${ROOTFS} && ! -z ${OVERLAYFS} && ! -z ${INSTALL} ]];then
+if [[ ! -d ${ROOTFS_} ]];then usage 1 "rootfs doesnt exist";fi
+if [[ -d ${OVERLAYFS_} ]];then usage 1 "overlayfs exists";fi
+function_check
+INSTALL_DIR=${MOUNT_}${OVERLAYFS}
+NODE="${OVERLAYFS}"
+mkdir ${OVERLAYFS_}
+mkdir ${MOUNT_}${OVERLAYFS}
+unionfs -o allow_other,use_ino,suid,dev,nonempty -o cow,max_files=33000 :${OVERLAYFS_}=RW:${ROOTFS_}=RO ${MOUNT_}${OVERLAYFS}
+for i in ${INSTALL};do . ./config/install_scripts/${i};done
+##########################################################################################################################################################################################
+elif [[ ! -z ${ROOTFS} && -z ${OVERLAYFS} && ! -z ${INSTALL} ]];then
+if [[ -d ${ROOTFS_} ]];then usage 1 "rootfs exists";fi
+function_check
+INSTALL_DIR=${ROOTFS_}
+NODE=${ROOTFS}
+mkdir -p ${INSTALL_DIR}/var/lib/pacman
+. ./config/install_scripts/${BASE}
+for i in ${INSTALL};do
+. ./config/install_scripts/${i}
+done
+##########################################################################################################################################################################################
+elif [[ ! -z ${ROOTFS} && -z ${OVERLAYFS} && -z ${INSTALL} ]];then 
+if [[ -d ${ROOTFS_} ]];then usage 1 "rootfs exists";fi
+INSTALL_DIR=${ROOTFS_}
+NODE=${ROOTFS}
+mkdir -p ${INSTALL_DIR}/var/lib/pacman
+. ./config/install_scripts/${BASE}
+##########################################################################################################################################################################################
+else
+usage 1
+fi
+##########################################################################################################################################################################################

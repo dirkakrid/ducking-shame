@@ -1,0 +1,7 @@
+#!/bin/env bash
+PACKAGES="plasma"
+CONFIG="./config/desktop"
+
+pacman -r ${INSTALL_DIR} pacman -Syu ${PACKAGES}
+#cp -af ${CONFIG}/* ${INSTALL_DIR}
+

@@ -1,0 +1,26 @@
+#!/bin/env bash
+PACKAGES="nginx fcgiwrap"
+CONFIG="./config/web"
+
+pacman -r ${INSTALL_DIR}  pacman -Syu ${PACKAGES}
+cp -af ${CONFIG}/* ${INSTALL_DIR}
+
+chroot ${INSTALL_DIR} groupadd nginx
+chroot ${INSTALL_DIR} groupadd cgi
+chroot ${INSTALL_DIR} useradd -g nginx -s /bin/false nginx
+chroot ${INSTALL_DIR} useradd -g cgi -s /bin/false cgi
+chroot ${INSTALL_DIR} gpasswd -a cgi nginx
+chroot ${INSTALL_DIR} gpasswd -a nginx cgi
+
+#openssl genrsa -des3 -out ${INSTALL_DIR}/home/nginx/keys/server.key 4096
+#openssl req -new -key ${INSTALL_DIR}/home/nginx/keys/server.key -out /home/nginx/keys/server.csr
+#cp ${INSTALL_DIR}/home/nginx/keys/server.key ${INSTALL_DIR}/home/nginx/keys/server.key.org
+#openssl rsa -in ${INSTALL_DIR}/home/nginx/keys/server.key.org -out ${INSTALL_DIR}/home/nginx/keys/server.key
+#openssl x509 -req -days 365 -in ${INSTALL_DIR}/home/nginx/keys/server.csr -signkey ${INSTALL_DIR}/home/nginx/keys/server.key -out ${INSTALL_DIR}/home/nginx/keys/server.crt
+
+chroot ${INSTALL_DIR} chown -R nginx:nginx /home/nginx
+chroot ${INSTALL_DIR} chown -R nginx:nginx /var/lib/nginx
+chroot ${INSTALL_DIR} chown -R cgi:cgi /home/nginx/webpanel/cgi-bin
+chroot ${INSTALL_DIR} chmod -R 750 /home/nginx
+chroot ${INSTALL_DIR} systemctl enable nginx.service
+chroot ${INSTALL_DIR} systemctl enable fcgiwrap.socket

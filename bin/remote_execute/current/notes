@@ -1,0 +1,21 @@
+right
+problem... 
+cant read input from the server port and pipe it through gpg...
+netcat connection doesnt close
+never hits gpg
+
+epoch time date +%s because the only google result for time stamp checking in bash was to touch a file and compare the time it was made hmmm
+seconds since 00:00:00 Jan 1 1970...
+
+should atleast make it easier to timestamp +60 seconds from execute
+
+im assuming the entire thing is going to have some problems around the 57-60 seconds mark
+
+from script gen iptables rules timestamp 
+
+but it can just reknock if less than 10 seconds remaining? 
+
+wont be a problem but i cant get netcat to pull a file and auto close or ide be done by now
+
+dumping some slightly obtuse iptables rules to just set this up and test on localhost... 
+

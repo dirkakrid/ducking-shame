@@ -1,0 +1,25 @@
+#!/bin/env bash
+ADMIN_KEY=$(cat /home/admin/.ssh/id_rsa.pub)
+SPAREPROJECT_KEY=$(cat /home/spareproject/.ssh/id_rsa.pub)
+for i in $(ls ${ROOTFS_});do
+  echo "#${ROOTFS_}${i}"
+  if [[ -f ${ROOTFS_}${i}/home/admin/.ssh/authorized_keys ]];then 
+    echo "admin/.ssh/authorized_keys exists"
+  fi
+  echo "${ROOTFS_}${i}/home/spareproject/.ssh/authorized_keys wtf"
+  if [[ -f ${ROOTFS_}${i}/home/spareproject/.ssh/authorized_keys ]];then 
+    echo "spareproject/.ssh/authorized_keys exists"
+  fi
+done
+
+for i in $(ls ${OVERLAYFS_});do
+  echo "#${OVERLAYFS_}${i}"
+  if [[ -f ${OVERLAYFS_}${i}/home/admin/.ssh/authorized_keys ]];then 
+    echo "admin/.ssh/authorized_keys exists"
+  fi
+  if [[ -f ${OVERLAYFS_}${i}/home/spareproject/.ssh/authorized_keys ]];then 
+    echo "spareproject/.ssh/authorized_keys exists"
+  fi
+
+done
+

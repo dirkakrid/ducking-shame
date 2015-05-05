@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+ROOTFS=${1}
+OVERLAYFS=${2}
+
+systemctl stop systemd-nspawn@${ROOTFS}.${OVERLAYFS}
+
+umount -R /var/lib/container/${ROOTFS}.${OVERLAYFS}
+rm -r /var/lib/container/${ROOTFS}.${OVERLAYFS}
+rm -r /mnt/container/overlayfs/${ROOTFS}.${OVERLAYFS}

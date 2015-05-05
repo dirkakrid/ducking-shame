@@ -1,0 +1,414 @@
+2014/12/13 00:05:13 [notice] 774#0: using the "epoll" event method
+2014/12/13 00:05:13 [notice] 774#0: nginx/1.6.2
+2014/12/13 00:05:13 [notice] 774#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 00:05:13 [notice] 774#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 00:05:13 [notice] 775#0: start worker processes
+2014/12/13 00:05:13 [notice] 775#0: start worker process 776
+2014/12/13 00:09:45 [notice] 775#0: signal 3 (SIGQUIT) received, shutting down
+2014/12/13 00:09:45 [notice] 776#0: gracefully shutting down
+2014/12/13 00:09:45 [notice] 776#0: exiting
+2014/12/13 00:09:45 [notice] 776#0: exit
+2014/12/13 00:09:45 [notice] 775#0: signal 17 (SIGCHLD) received
+2014/12/13 00:09:45 [notice] 775#0: worker process 776 exited with code 0
+2014/12/13 00:09:45 [notice] 775#0: exit
+2014/12/13 00:09:45 [notice] 1252#0: using the "epoll" event method
+2014/12/13 00:09:45 [notice] 1252#0: nginx/1.6.2
+2014/12/13 00:09:45 [notice] 1252#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 00:09:45 [notice] 1252#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 00:09:45 [notice] 1253#0: start worker processes
+2014/12/13 00:09:45 [notice] 1253#0: start worker process 1254
+2014/12/13 00:12:39 [notice] 1253#0: signal 3 (SIGQUIT) received, shutting down
+2014/12/13 00:12:39 [notice] 1254#0: gracefully shutting down
+2014/12/13 00:12:39 [notice] 1254#0: exiting
+2014/12/13 00:12:39 [notice] 1254#0: exit
+2014/12/13 00:12:40 [notice] 1253#0: signal 17 (SIGCHLD) received
+2014/12/13 00:12:40 [notice] 1253#0: worker process 1254 exited with code 0
+2014/12/13 00:12:40 [notice] 1253#0: exit
+2014/12/13 00:12:40 [notice] 1555#0: using the "epoll" event method
+2014/12/13 00:12:40 [notice] 1555#0: nginx/1.6.2
+2014/12/13 00:12:40 [notice] 1555#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 00:12:40 [notice] 1555#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 00:12:40 [notice] 1556#0: start worker processes
+2014/12/13 00:12:40 [notice] 1556#0: start worker process 1557
+2014/12/13 00:13:28 [notice] 1556#0: signal 3 (SIGQUIT) received, shutting down
+2014/12/13 00:13:28 [notice] 1557#0: gracefully shutting down
+2014/12/13 00:13:28 [notice] 1557#0: exiting
+2014/12/13 00:13:28 [notice] 1557#0: exit
+2014/12/13 00:13:28 [notice] 1556#0: signal 17 (SIGCHLD) received
+2014/12/13 00:13:28 [notice] 1556#0: worker process 1557 exited with code 0
+2014/12/13 00:13:28 [notice] 1556#0: exit
+2014/12/13 00:13:28 [notice] 1649#0: using the "epoll" event method
+2014/12/13 00:13:28 [notice] 1649#0: nginx/1.6.2
+2014/12/13 00:13:28 [notice] 1649#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 00:13:28 [notice] 1649#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 00:13:28 [notice] 1650#0: start worker processes
+2014/12/13 00:13:28 [notice] 1650#0: start worker process 1651
+2014/12/13 00:17:47 [notice] 1650#0: signal 3 (SIGQUIT) received, shutting down
+2014/12/13 00:17:47 [notice] 1651#0: gracefully shutting down
+2014/12/13 00:17:47 [notice] 1651#0: exiting
+2014/12/13 00:17:47 [notice] 1651#0: exit
+2014/12/13 00:17:47 [notice] 1650#0: signal 17 (SIGCHLD) received
+2014/12/13 00:17:47 [notice] 1650#0: worker process 1651 exited with code 0
+2014/12/13 00:17:47 [notice] 1650#0: exit
+2014/12/13 00:17:47 [notice] 2092#0: using the "epoll" event method
+2014/12/13 00:17:47 [notice] 2092#0: nginx/1.6.2
+2014/12/13 00:17:47 [notice] 2092#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 00:17:47 [notice] 2092#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 00:17:47 [notice] 2093#0: start worker processes
+2014/12/13 00:17:47 [notice] 2093#0: start worker process 2094
+2014/12/13 00:18:02 [notice] 2093#0: signal 3 (SIGQUIT) received, shutting down
+2014/12/13 00:18:02 [notice] 2094#0: gracefully shutting down
+2014/12/13 00:18:02 [notice] 2094#0: exiting
+2014/12/13 00:18:02 [notice] 2094#0: exit
+2014/12/13 00:18:03 [notice] 2093#0: signal 17 (SIGCHLD) received
+2014/12/13 00:18:03 [notice] 2093#0: worker process 2094 exited with code 0
+2014/12/13 00:18:03 [notice] 2093#0: exit
+2014/12/13 00:18:03 [notice] 2143#0: using the "epoll" event method
+2014/12/13 00:18:03 [notice] 2143#0: nginx/1.6.2
+2014/12/13 00:18:03 [notice] 2143#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 00:18:03 [notice] 2143#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 00:18:03 [notice] 2144#0: start worker processes
+2014/12/13 00:18:03 [notice] 2144#0: start worker process 2145
+2014/12/13 00:18:17 [notice] 2144#0: signal 3 (SIGQUIT) received, shutting down
+2014/12/13 00:18:17 [notice] 2145#0: gracefully shutting down
+2014/12/13 00:18:17 [notice] 2145#0: exiting
+2014/12/13 00:18:17 [notice] 2145#0: exit
+2014/12/13 00:18:18 [notice] 2144#0: signal 17 (SIGCHLD) received
+2014/12/13 00:18:18 [notice] 2144#0: worker process 2145 exited with code 0
+2014/12/13 00:18:18 [notice] 2144#0: exit
+2014/12/13 00:18:18 [notice] 2183#0: using the "epoll" event method
+2014/12/13 00:18:18 [notice] 2183#0: nginx/1.6.2
+2014/12/13 00:18:18 [notice] 2183#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 00:18:18 [notice] 2183#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 00:18:18 [notice] 2184#0: start worker processes
+2014/12/13 00:18:18 [notice] 2184#0: start worker process 2185
+2014/12/13 00:18:41 [notice] 2184#0: signal 3 (SIGQUIT) received, shutting down
+2014/12/13 00:18:41 [notice] 2185#0: gracefully shutting down
+2014/12/13 00:18:41 [notice] 2185#0: exiting
+2014/12/13 00:18:41 [notice] 2185#0: exit
+2014/12/13 00:18:41 [notice] 2184#0: signal 17 (SIGCHLD) received
+2014/12/13 00:18:41 [notice] 2184#0: worker process 2185 exited with code 0
+2014/12/13 00:18:41 [notice] 2184#0: exit
+2014/12/13 00:18:41 [notice] 2237#0: using the "epoll" event method
+2014/12/13 00:18:41 [notice] 2237#0: nginx/1.6.2
+2014/12/13 00:18:41 [notice] 2237#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 00:18:41 [notice] 2237#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 00:18:41 [notice] 2238#0: start worker processes
+2014/12/13 00:18:41 [notice] 2238#0: start worker process 2239
+2014/12/13 00:19:50 [notice] 2238#0: signal 3 (SIGQUIT) received, shutting down
+2014/12/13 00:19:50 [notice] 2239#0: gracefully shutting down
+2014/12/13 00:19:50 [notice] 2239#0: exiting
+2014/12/13 00:19:50 [notice] 2239#0: exit
+2014/12/13 00:19:50 [notice] 2238#0: signal 17 (SIGCHLD) received
+2014/12/13 00:19:50 [notice] 2238#0: worker process 2239 exited with code 0
+2014/12/13 00:19:50 [notice] 2238#0: exit
+2014/12/13 00:19:50 [notice] 2367#0: using the "epoll" event method
+2014/12/13 00:19:50 [notice] 2367#0: nginx/1.6.2
+2014/12/13 00:19:50 [notice] 2367#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 00:19:50 [notice] 2367#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 00:19:50 [notice] 2368#0: start worker processes
+2014/12/13 00:19:50 [notice] 2368#0: start worker process 2369
+2014/12/13 00:20:46 [notice] 2368#0: signal 3 (SIGQUIT) received, shutting down
+2014/12/13 00:20:46 [notice] 2369#0: gracefully shutting down
+2014/12/13 00:20:46 [notice] 2369#0: exiting
+2014/12/13 00:20:46 [notice] 2369#0: exit
+2014/12/13 00:20:46 [notice] 2368#0: signal 17 (SIGCHLD) received
+2014/12/13 00:20:46 [notice] 2368#0: worker process 2369 exited with code 0
+2014/12/13 00:20:46 [notice] 2368#0: exit
+2014/12/13 00:20:46 [notice] 2471#0: using the "epoll" event method
+2014/12/13 00:20:46 [notice] 2471#0: nginx/1.6.2
+2014/12/13 00:20:46 [notice] 2471#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 00:20:46 [notice] 2471#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 00:20:46 [notice] 2472#0: start worker processes
+2014/12/13 00:20:46 [notice] 2472#0: start worker process 2473
+2014/12/13 00:31:49 [notice] 2472#0: signal 3 (SIGQUIT) received, shutting down
+2014/12/13 00:31:49 [notice] 2473#0: gracefully shutting down
+2014/12/13 00:31:49 [notice] 2473#0: exiting
+2014/12/13 00:31:49 [notice] 2473#0: exit
+2014/12/13 00:31:49 [notice] 2472#0: signal 17 (SIGCHLD) received
+2014/12/13 00:31:49 [notice] 2472#0: worker process 2473 exited with code 0
+2014/12/13 00:31:49 [notice] 2472#0: exit
+2014/12/13 00:31:49 [notice] 3683#0: using the "epoll" event method
+2014/12/13 00:31:49 [notice] 3683#0: nginx/1.6.2
+2014/12/13 00:31:49 [notice] 3683#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 00:31:49 [notice] 3683#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 00:31:49 [notice] 3684#0: start worker processes
+2014/12/13 00:31:49 [notice] 3684#0: start worker process 3685
+2014/12/13 00:31:59 [emerg] 3722#0: bind() to 127.0.0.1:8080 failed (98: Address already in use)
+2014/12/13 00:31:59 [notice] 3722#0: try again to bind() after 500ms
+2014/12/13 00:31:59 [notice] 3722#0: using the "epoll" event method
+2014/12/13 00:31:59 [notice] 3722#0: nginx/1.6.2
+2014/12/13 00:31:59 [notice] 3722#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 00:31:59 [notice] 3722#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 00:31:59 [notice] 3723#0: start worker processes
+2014/12/13 00:31:59 [notice] 3723#0: start worker process 3724
+2014/12/13 20:56:21 [notice] 3732#0: using the "epoll" event method
+2014/12/13 20:56:21 [notice] 3732#0: nginx/1.6.2
+2014/12/13 20:56:21 [notice] 3732#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 20:56:21 [notice] 3732#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 20:56:21 [emerg] 3733#0: open() "/run/nginx.pid" failed (13: Permission denied)
+2014/12/13 20:57:24 [notice] 3864#0: using the "epoll" event method
+2014/12/13 20:57:24 [notice] 3864#0: nginx/1.6.2
+2014/12/13 20:57:24 [notice] 3864#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 20:57:24 [notice] 3864#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 20:57:24 [emerg] 3865#0: open() "/run/nginx.pid" failed (13: Permission denied)
+2014/12/13 20:57:55 [notice] 3941#0: using the "epoll" event method
+2014/12/13 20:57:55 [notice] 3941#0: nginx/1.6.2
+2014/12/13 20:57:55 [notice] 3941#0: OS: Linux 3.17.4-1-ARCH
+2014/12/13 20:57:55 [notice] 3941#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/13 20:57:55 [notice] 3942#0: start worker processes
+2014/12/13 20:57:55 [notice] 3942#0: start worker process 3943
+2014/12/14 11:42:24 [notice] 848#0: using the "epoll" event method
+2014/12/14 11:42:24 [notice] 848#0: nginx/1.6.2
+2014/12/14 11:42:24 [notice] 848#0: OS: Linux 3.17.4-1-ARCH
+2014/12/14 11:42:24 [notice] 848#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/14 11:42:24 [notice] 849#0: start worker processes
+2014/12/14 11:42:24 [notice] 849#0: start worker process 850
+2014/12/14 12:00:53 [notice] 794#0: using the "epoll" event method
+2014/12/14 12:00:53 [notice] 794#0: nginx/1.6.2
+2014/12/14 12:00:53 [notice] 794#0: OS: Linux 3.17.6-1-ARCH
+2014/12/14 12:00:53 [notice] 794#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/14 12:00:53 [notice] 795#0: start worker processes
+2014/12/14 12:00:53 [notice] 795#0: start worker process 796
+2014/12/14 18:20:24 [notice] 2847#0: using the "epoll" event method
+2014/12/14 18:20:24 [notice] 2847#0: nginx/1.6.2
+2014/12/14 18:20:24 [notice] 2847#0: OS: Linux 3.17.6-1-ARCH
+2014/12/14 18:20:24 [notice] 2847#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/14 18:20:24 [notice] 2848#0: start worker processes
+2014/12/14 18:20:24 [notice] 2848#0: start worker process 2849
+2014/12/15 00:22:19 [notice] 829#0: using the "epoll" event method
+2014/12/15 00:22:19 [notice] 829#0: nginx/1.6.2
+2014/12/15 00:22:19 [notice] 829#0: OS: Linux 3.17.6-1-ARCH
+2014/12/15 00:22:19 [notice] 829#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/15 00:22:19 [notice] 830#0: start worker processes
+2014/12/15 00:22:19 [notice] 830#0: start worker process 831
+2014/12/15 09:17:07 [notice] 3003#0: using the "epoll" event method
+2014/12/15 09:17:07 [notice] 3003#0: nginx/1.6.2
+2014/12/15 09:17:07 [notice] 3003#0: OS: Linux 3.17.6-1-ARCH
+2014/12/15 09:17:07 [notice] 3003#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2014/12/15 09:17:07 [notice] 3004#0: start worker processes
+2014/12/15 09:17:07 [notice] 3004#0: start worker process 3005
+2015/01/05 21:48:18 [notice] 40#0: using the "epoll" event method
+2015/01/05 21:48:18 [notice] 40#0: nginx/1.6.2
+2015/01/05 21:48:18 [notice] 40#0: OS: Linux 3.17.6-1-ARCH
+2015/01/05 21:48:18 [notice] 40#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/05 21:48:18 [notice] 53#0: start worker processes
+2015/01/05 21:48:18 [notice] 53#0: start worker process 56
+2015/01/07 22:52:18 [notice] 3997#0: using the "epoll" event method
+2015/01/07 22:52:18 [notice] 3997#0: nginx/1.6.2
+2015/01/07 22:52:18 [notice] 3997#0: OS: Linux 3.17.6-1-ARCH
+2015/01/07 22:52:18 [notice] 3997#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/07 22:52:18 [notice] 3998#0: start worker processes
+2015/01/07 22:52:18 [notice] 3998#0: start worker process 3999
+2015/01/07 22:53:41 [notice] 3998#0: signal 3 (SIGQUIT) received, shutting down
+2015/01/07 22:53:41 [notice] 3999#0: gracefully shutting down
+2015/01/07 22:53:41 [notice] 3999#0: exiting
+2015/01/07 22:53:41 [notice] 3999#0: exit
+2015/01/07 22:53:41 [notice] 3998#0: signal 17 (SIGCHLD) received
+2015/01/07 22:53:41 [notice] 3998#0: worker process 3999 exited with code 0
+2015/01/07 22:53:41 [alert] 3998#0: unlink() "/home/nginx/nginx.pid" failed (13: Permission denied)
+2015/01/07 22:53:41 [notice] 3998#0: exit
+2015/01/07 22:54:40 [notice] 4133#0: using the "epoll" event method
+2015/01/07 22:54:40 [notice] 4133#0: nginx/1.6.2
+2015/01/07 22:54:40 [notice] 4133#0: OS: Linux 3.17.6-1-ARCH
+2015/01/07 22:54:40 [notice] 4133#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/07 22:54:40 [notice] 4134#0: start worker processes
+2015/01/07 22:54:40 [notice] 4134#0: start worker process 4135
+2015/01/08 14:25:00 [notice] 796#0: using the "epoll" event method
+2015/01/08 14:25:00 [notice] 796#0: nginx/1.6.2
+2015/01/08 14:25:00 [notice] 796#0: OS: Linux 3.17.6-1-ARCH
+2015/01/08 14:25:00 [notice] 796#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/08 14:25:00 [notice] 797#0: start worker processes
+2015/01/08 14:25:00 [notice] 797#0: start worker process 798
+2015/01/08 15:29:19 [notice] 946#0: using the "epoll" event method
+2015/01/08 15:29:19 [notice] 946#0: nginx/1.6.2
+2015/01/08 15:29:19 [notice] 946#0: OS: Linux 3.17.6-1-ARCH
+2015/01/08 15:29:19 [notice] 946#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/08 15:29:19 [notice] 947#0: start worker processes
+2015/01/08 15:29:19 [notice] 947#0: start worker process 948
+2015/01/08 18:46:15 [notice] 984#0: using the "epoll" event method
+2015/01/08 18:46:15 [notice] 984#0: nginx/1.6.2
+2015/01/08 18:46:15 [notice] 984#0: OS: Linux 3.17.6-1-ARCH
+2015/01/08 18:46:15 [notice] 984#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/08 18:46:15 [notice] 985#0: start worker processes
+2015/01/08 18:46:15 [notice] 985#0: start worker process 986
+2015/01/08 22:15:53 [notice] 985#0: signal 3 (SIGQUIT) received, shutting down
+2015/01/08 22:15:53 [notice] 986#0: gracefully shutting down
+2015/01/08 22:15:53 [notice] 986#0: exiting
+2015/01/08 22:15:53 [notice] 986#0: exit
+2015/01/08 22:15:53 [notice] 985#0: signal 17 (SIGCHLD) received
+2015/01/08 22:15:53 [notice] 985#0: worker process 986 exited with code 0
+2015/01/08 22:15:53 [notice] 985#0: exit
+2015/01/08 22:15:57 [notice] 19295#0: using the "epoll" event method
+2015/01/08 22:15:57 [notice] 19295#0: nginx/1.6.2
+2015/01/08 22:15:57 [notice] 19295#0: OS: Linux 3.17.6-1-ARCH
+2015/01/08 22:15:57 [notice] 19295#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/08 22:15:57 [notice] 19296#0: start worker processes
+2015/01/08 22:15:57 [notice] 19296#0: start worker process 19297
+2015/01/08 22:17:08 [notice] 19296#0: signal 3 (SIGQUIT) received, shutting down
+2015/01/08 22:17:08 [notice] 19297#0: gracefully shutting down
+2015/01/08 22:17:08 [notice] 19297#0: exiting
+2015/01/08 22:17:08 [notice] 19297#0: exit
+2015/01/08 22:17:08 [notice] 19296#0: signal 17 (SIGCHLD) received
+2015/01/08 22:17:08 [notice] 19296#0: worker process 19297 exited with code 0
+2015/01/08 22:17:08 [notice] 19296#0: exit
+2015/01/08 22:17:12 [notice] 19416#0: using the "epoll" event method
+2015/01/08 22:17:12 [notice] 19416#0: nginx/1.6.2
+2015/01/08 22:17:12 [notice] 19416#0: OS: Linux 3.17.6-1-ARCH
+2015/01/08 22:17:12 [notice] 19416#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/08 22:17:12 [notice] 19417#0: start worker processes
+2015/01/08 22:17:12 [notice] 19417#0: start worker process 19418
+2015/01/09 01:42:13 [notice] 19417#0: signal 3 (SIGQUIT) received, shutting down
+2015/01/09 01:42:13 [notice] 19418#0: gracefully shutting down
+2015/01/09 01:42:13 [notice] 19418#0: exiting
+2015/01/09 01:42:13 [notice] 19418#0: exit
+2015/01/09 01:42:13 [notice] 19417#0: signal 17 (SIGCHLD) received
+2015/01/09 01:42:13 [notice] 19417#0: worker process 19418 exited with code 0
+2015/01/09 01:42:13 [notice] 19417#0: exit
+2015/01/09 01:55:02 [notice] 1535#0: using the "epoll" event method
+2015/01/09 01:55:02 [notice] 1535#0: nginx/1.6.2
+2015/01/09 01:55:02 [notice] 1535#0: OS: Linux 3.17.6-1-ARCH
+2015/01/09 01:55:02 [notice] 1535#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/09 01:55:02 [notice] 1536#0: start worker processes
+2015/01/09 01:55:02 [notice] 1536#0: start worker process 1537
+2015/01/09 01:55:39 [notice] 1536#0: signal 3 (SIGQUIT) received, shutting down
+2015/01/09 01:55:39 [notice] 1537#0: gracefully shutting down
+2015/01/09 01:55:39 [notice] 1537#0: exiting
+2015/01/09 01:55:39 [notice] 1537#0: exit
+2015/01/09 01:55:39 [notice] 1536#0: signal 17 (SIGCHLD) received
+2015/01/09 01:55:39 [notice] 1536#0: worker process 1537 exited with code 0
+2015/01/09 01:55:39 [notice] 1536#0: exit
+2015/01/09 01:55:43 [notice] 1591#0: using the "epoll" event method
+2015/01/09 01:55:43 [notice] 1591#0: nginx/1.6.2
+2015/01/09 01:55:43 [notice] 1591#0: OS: Linux 3.17.6-1-ARCH
+2015/01/09 01:55:43 [notice] 1591#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/09 01:55:43 [notice] 1592#0: start worker processes
+2015/01/09 01:55:43 [notice] 1592#0: start worker process 1593
+2015/01/09 03:18:49 [notice] 1592#0: signal 3 (SIGQUIT) received, shutting down
+2015/01/09 03:18:49 [notice] 1593#0: gracefully shutting down
+2015/01/09 03:18:49 [notice] 1593#0: exiting
+2015/01/09 03:18:49 [notice] 1593#0: exit
+2015/01/09 03:18:49 [notice] 1592#0: signal 17 (SIGCHLD) received
+2015/01/09 03:18:49 [notice] 1592#0: worker process 1593 exited with code 0
+2015/01/09 03:18:49 [notice] 1592#0: exit
+2015/01/09 13:00:52 [notice] 1372#0: using the "epoll" event method
+2015/01/09 13:00:52 [notice] 1372#0: nginx/1.6.2
+2015/01/09 13:00:52 [notice] 1372#0: OS: Linux 3.17.6-1-ARCH
+2015/01/09 13:00:52 [notice] 1372#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/09 13:00:52 [notice] 1373#0: start worker processes
+2015/01/09 13:00:52 [notice] 1373#0: start worker process 1374
+2015/01/09 13:51:49 [notice] 1373#0: signal 3 (SIGQUIT) received, shutting down
+2015/01/09 13:51:49 [notice] 1374#0: gracefully shutting down
+2015/01/09 13:51:49 [notice] 1374#0: exiting
+2015/01/09 13:51:49 [notice] 1374#0: exit
+2015/01/09 13:51:49 [notice] 1373#0: signal 17 (SIGCHLD) received
+2015/01/09 13:51:49 [notice] 1373#0: worker process 1374 exited with code 0
+2015/01/09 13:51:49 [notice] 1373#0: exit
+2015/01/09 14:22:44 [notice] 1266#0: using the "epoll" event method
+2015/01/09 14:22:44 [notice] 1266#0: nginx/1.6.2
+2015/01/09 14:22:44 [notice] 1266#0: OS: Linux 3.17.6-1-ARCH
+2015/01/09 14:22:44 [notice] 1266#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/09 14:22:44 [notice] 1267#0: start worker processes
+2015/01/09 14:22:44 [notice] 1267#0: start worker process 1268
+2015/01/10 00:45:35 [notice] 1239#0: using the "epoll" event method
+2015/01/10 00:45:35 [notice] 1239#0: nginx/1.6.2
+2015/01/10 00:45:35 [notice] 1239#0: OS: Linux 3.17.6-1-ARCH
+2015/01/10 00:45:35 [notice] 1239#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/10 00:45:35 [notice] 1240#0: start worker processes
+2015/01/10 00:45:35 [notice] 1240#0: start worker process 1241
+2015/01/10 01:12:34 [notice] 2376#0: using the "epoll" event method
+2015/01/10 01:12:34 [notice] 2376#0: nginx/1.6.2
+2015/01/10 01:12:34 [notice] 2376#0: OS: Linux 3.17.6-1-ARCH
+2015/01/10 01:12:34 [notice] 2376#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/10 01:12:34 [notice] 2377#0: start worker processes
+2015/01/10 01:12:34 [notice] 2377#0: start worker process 2378
+2015/01/10 04:34:17 [notice] 2377#0: signal 3 (SIGQUIT) received, shutting down
+2015/01/10 04:34:17 [notice] 2378#0: gracefully shutting down
+2015/01/10 04:34:17 [notice] 2378#0: exiting
+2015/01/10 04:34:17 [notice] 2378#0: exit
+2015/01/10 04:34:17 [notice] 2377#0: signal 17 (SIGCHLD) received
+2015/01/10 04:34:17 [notice] 2377#0: worker process 2378 exited with code 0
+2015/01/10 04:34:17 [notice] 2377#0: exit
+2015/01/10 17:43:28 [notice] 749#0: using the "epoll" event method
+2015/01/10 17:43:28 [notice] 749#0: nginx/1.6.2
+2015/01/10 17:43:28 [notice] 749#0: OS: Linux 3.17.6-1-ARCH
+2015/01/10 17:43:28 [notice] 749#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/10 17:43:28 [notice] 750#0: start worker processes
+2015/01/10 17:43:28 [notice] 750#0: start worker process 751
+2015/01/10 17:44:19 [notice] 750#0: signal 3 (SIGQUIT) received, shutting down
+2015/01/10 17:44:19 [notice] 751#0: gracefully shutting down
+2015/01/10 17:44:19 [notice] 751#0: exiting
+2015/01/10 17:44:19 [notice] 751#0: exit
+2015/01/10 17:44:19 [notice] 750#0: signal 17 (SIGCHLD) received
+2015/01/10 17:44:19 [notice] 750#0: worker process 751 exited with code 0
+2015/01/10 17:44:19 [notice] 750#0: exit
+2015/01/10 17:44:19 [notice] 1013#0: using the "epoll" event method
+2015/01/10 17:44:19 [notice] 1013#0: nginx/1.6.2
+2015/01/10 17:44:19 [notice] 1013#0: OS: Linux 3.17.6-1-ARCH
+2015/01/10 17:44:19 [notice] 1013#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/10 17:44:19 [notice] 1014#0: start worker processes
+2015/01/10 17:44:19 [notice] 1014#0: start worker process 1015
+2015/01/10 17:51:28 [notice] 1014#0: signal 3 (SIGQUIT) received, shutting down
+2015/01/10 17:51:28 [notice] 1015#0: gracefully shutting down
+2015/01/10 17:51:28 [notice] 1015#0: exiting
+2015/01/10 17:51:28 [notice] 1015#0: exit
+2015/01/10 17:51:28 [notice] 1014#0: signal 17 (SIGCHLD) received
+2015/01/10 17:51:28 [notice] 1014#0: worker process 1015 exited with code 0
+2015/01/10 17:51:28 [notice] 1014#0: exit
+2015/01/10 19:28:14 [notice] 1004#0: using the "epoll" event method
+2015/01/10 19:28:14 [notice] 1004#0: nginx/1.6.2
+2015/01/10 19:28:14 [notice] 1004#0: OS: Linux 3.17.6-1-ARCH
+2015/01/10 19:28:14 [notice] 1004#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/10 19:28:14 [notice] 1005#0: start worker processes
+2015/01/10 19:28:14 [notice] 1005#0: start worker process 1006
+2015/01/10 19:37:45 [notice] 1005#0: signal 3 (SIGQUIT) received, shutting down
+2015/01/10 19:37:45 [notice] 1006#0: gracefully shutting down
+2015/01/10 19:37:45 [notice] 1006#0: exiting
+2015/01/10 19:37:45 [notice] 1006#0: exit
+2015/01/10 19:37:45 [notice] 1005#0: signal 17 (SIGCHLD) received
+2015/01/10 19:37:45 [notice] 1005#0: worker process 1006 exited with code 0
+2015/01/10 19:37:45 [notice] 1005#0: exit
+2015/01/10 20:15:23 [notice] 1132#0: using the "epoll" event method
+2015/01/10 20:15:23 [notice] 1132#0: nginx/1.6.2
+2015/01/10 20:15:23 [notice] 1132#0: OS: Linux 3.17.6-1-ARCH
+2015/01/10 20:15:23 [notice] 1132#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/10 20:15:23 [notice] 1133#0: start worker processes
+2015/01/10 20:15:23 [notice] 1133#0: start worker process 1134
+2015/01/11 01:37:52 [notice] 918#0: using the "epoll" event method
+2015/01/11 01:37:52 [notice] 918#0: nginx/1.6.2
+2015/01/11 01:37:52 [notice] 918#0: OS: Linux 3.17.6-1-ARCH
+2015/01/11 01:37:52 [notice] 918#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/11 01:37:52 [notice] 919#0: start worker processes
+2015/01/11 01:37:52 [notice] 919#0: start worker process 920
+2015/01/11 01:47:38 [notice] 919#0: signal 3 (SIGQUIT) received, shutting down
+2015/01/11 01:47:38 [notice] 920#0: gracefully shutting down
+2015/01/11 01:47:38 [notice] 920#0: exiting
+2015/01/11 01:47:38 [notice] 920#0: exit
+2015/01/11 01:47:38 [notice] 919#0: signal 17 (SIGCHLD) received
+2015/01/11 01:47:38 [notice] 919#0: worker process 920 exited with code 0
+2015/01/11 01:47:38 [notice] 919#0: exit
+2015/01/11 01:54:10 [notice] 19668#0: using the "epoll" event method
+2015/01/11 01:54:10 [notice] 19668#0: nginx/1.6.2
+2015/01/11 01:54:10 [notice] 19668#0: OS: Linux 3.17.6-1-ARCH
+2015/01/11 01:54:10 [notice] 19668#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/11 01:54:10 [notice] 19669#0: start worker processes
+2015/01/11 01:54:10 [notice] 19669#0: start worker process 19670
+2015/01/11 04:53:13 [notice] 19669#0: signal 3 (SIGQUIT) received, shutting down
+2015/01/11 04:53:13 [notice] 19670#0: gracefully shutting down
+2015/01/11 04:53:13 [notice] 19670#0: exiting
+2015/01/11 04:53:13 [notice] 19670#0: exit
+2015/01/11 04:53:13 [notice] 19669#0: signal 17 (SIGCHLD) received
+2015/01/11 04:53:13 [notice] 19669#0: worker process 19670 exited with code 0
+2015/01/11 04:53:13 [notice] 19669#0: exit
+2015/01/11 13:38:52 [notice] 15944#0: using the "epoll" event method
+2015/01/11 13:38:52 [notice] 15944#0: nginx/1.6.2
+2015/01/11 13:38:52 [notice] 15944#0: OS: Linux 3.17.6-1-ARCH
+2015/01/11 13:38:52 [notice] 15944#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/11 13:38:52 [notice] 15945#0: start worker processes
+2015/01/11 13:38:52 [notice] 15945#0: start worker process 15946
+2015/01/11 17:11:11 [notice] 948#0: using the "epoll" event method
+2015/01/11 17:11:11 [notice] 948#0: nginx/1.6.2
+2015/01/11 17:11:11 [notice] 948#0: OS: Linux 3.17.6-1-ARCH
+2015/01/11 17:11:11 [notice] 948#0: getrlimit(RLIMIT_NOFILE): 1024:4096
+2015/01/11 17:11:11 [notice] 949#0: start worker processes
+2015/01/11 17:11:11 [notice] 949#0: start worker process 950

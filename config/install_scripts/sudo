@@ -1,0 +1,26 @@
+#!/bin/env bash
+PACKAGES="sudo"
+CONFIG="./config/sudo"
+
+pacman -r ${INSTALL_DIR} -Syu ${PACKAGES}
+cp -af ${CONFIG}/* ${INSTALL_DIR}
+
+chroot ${INSTALL_DIR} chmod -R 700 /etc/sudoers
+chroot ${INSTALL_DIR} chmod -R 700 /etc/sudoers.d
+chroot ${INSTALL_DIR} useradd -g wheel -s /bin/bash admin
+
+ADMIN=""
+while [[ ${#ADMIN} -lt 1000 ]];do
+ADMIN+=$(cat /dev/random | fold -w 1024 | head -n 1)
+done
+SPAREPROJECT=$(echo ${ADMIN} | sha512sum | sed -r 's/...$//')
+sed -i "s/admin:\!/admin:\$6\$rounds=65536\$$ADMIN/g" ${INSTALL_DIR}/etc/shadow
+unset ADMIN
+
+ssh-keygen -t rsa -b 4096 -f ${INSTALL_DIR}/home/admin/sshd/ssh_host_rsa_key -N ""
+ssh-keygen -t rsa -b 4096 -C "admin@container" -f ${INSTALL_DIR}/home/admin/.ssh/id_rsa -N ""
+cat /home/admin/.ssh/id_rsa.pub >> ${INSTALL_DIR}/home/admin/.ssh/authorized_keys
+
+chroot ${INSTALL_DIR} chown -R admin:wheel /home/admin
+chroot ${INSTALL_DIR} chmod -R 700 /home/admin
+chroot ${INSTALL_DIR} systemctl enable sshd-admin.service

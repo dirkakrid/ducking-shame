@@ -1,0 +1,88 @@
+#!/bin/env bash
+##########################################################################################################################################################################################
+function usage {
+cat << EOF
+${0} - help
+-r rootfs
+-o overlayfs  
+-t tmpfs
+-b bridge     - defaults to internal
+-h help
+EOF
+if [[ ${2} ]];then printf "%s\n" "${2}";fi
+exit ${1}
+}
+##########################################################################################################################################################################################
+BRIDGE="internal"
+##########################################################################################################################################################################################
+while getopts 'r:o:t:b:h' arg;do
+case "${arg}" in
+r)
+ROOTFS="${OPTARG}"
+ROOTFS_+="${ROOTFS}"
+WORKAROUND+="${OPTARG}"
+;;
+o)
+OVERLAYFS="${ROOTFS}.${OPTARG}"
+OVERLAYFS_+="${OVERLAYFS}"
+WORKAROUND+=".${OPTARG}"
+;;
+t)
+TMPFS="${WORKAROUND}.${OPTARG}"
+TMPFS_+="${TMPFS}"
+;;
+b)
+BRIDGE="${OPTARG}"
+;;
+h) usage 0;;
+*) usage 1;;
+esac
+done
+##########################################################################################################################################################################################
+function debuggery {
+cat << EOF
+debuggery...
+ROOTFS:       ${ROOTFS}
+ROOTFS_:      ${ROOTFS_}
+OVERLAYFS:    ${OVERLAYFS}
+OVERLAYFS_:   ${OVERLAYFS_}
+TMPFS:        ${TMPFS}
+TMPFS_:       ${TMPFS_}
+MOUNT_:       ${MOUNT_}
+EOF
+}
+##########################################################################################################################################################################################
+# this could be more usefull but drop everything only really causes issues if its running remote
+DROP_CAP="CAP_CHOWN, CAP_DAC_OVERRIDE, CAP_DAC_READ_SEARCH, CAP_FOWNER, CAP_FSETID, CAP_IPC_OWNER, CAP_KILL, CAP_LEASE, CAP_LINUX_IMMUTABLE, CAP_NET_BIND_SERVICE, CAP_NET_BROADCAST, CAP_NET_RAW, CAP_SETGID, CAP_SETFCAP, CAP_SETPCAP, CAP_SETUID, CAP_SYS_ADMIN, CAP_SYS_CHROOT, CAP_SYS_NICE, CAP_SYS_PTRACE, CAP_SYS_TTY_CONFIG, CAP_SYS_RESOURCE, CAP_SYS_BOOT, CAP_AUDIT_WRITE, CAP_AUDIT_CONTROL. CAP_NET_ADMIN"
+#DROP_CAP=""
+##########################################################################################################################################################################################
+if [[ ! -z ${ROOTFS} && -z ${OVERLAYFS} && -z ${TMPFS} ]];then
+if [[ ! -d ${ROOTFS_} ]];then usage 1 "rootfs doesnt exist";fi
+/usr/bin/systemd-nspawn --quiet --boot --network-bridge=${BRIDGE} --directory=${ROOTFS_} --machine ${ROOTFS} --drop-capability=${DROP_CAP}
+##########################################################################################################################################################################################
+elif [[ ! -z ${ROOTFS} && ! -z ${OVERLAYFS} && -z ${TMPFS} ]];then
+if [[ ! -d ${ROOTFS_} ]];then usage 1 "rootfs doesnt exist";fi
+if [[ ! -d ${OVERLAYFS_} ]];then usage 1 "overlayfs doesnt exist";fi
+if [[ ! -d ${MOUNT_}${OVERLAYFS} ]];then mkdir ${MOUNT_}${OVERLAYFS};fi
+if [[ ! $(mount | grep ${MOUNT_}${OVERLAYFS}) ]];then unionfs -o allow_other,use_ino,suid,dev,nonempty -o cow,max_files=33000 ${OVERLAYFS_}=RW:${ROOTFS_}=RO ${MOUNT_}${OVERLAYFS};fi
+/usr/bin/systemd-nspawn --quiet --boot --network-bridge=${BRIDGE} --directory=${MOUNT_}${OVERLAYFS} -M ${OVERLAYFS} --drop-capability=${DROP_CAP}
+##########################################################################################################################################################################################
+elif [[ ! -z ${ROOTFS} && -z ${OVERLAYFS} && ! -z ${TMPFS} ]];then
+if [[ ! -d ${ROOTFS_} ]];then usage 1 "rootfs doesnt exist";fi
+if [[ -d ${TMPFS_} ]];then usage 1 "tmpfs exists its called tmp for a reason...";else mkdir ${TMPFS_};fi
+if [[ ! -d ${MOUNT_}${TMPFS} ]];then mkdir ${MOUNT_}${TMPFS};fi
+if [[ ! $(mount | grep ${MOUNT_}${TMPFS}) ]];then unionfs -o allow_other,use_ino,suid,dev,nonempty -o cow,max_files=33000 ${TMPFS_}=RW:${ROOTFS_}=RO ${MOUNT_}${TMPFS};fi
+/usr/bin/systemd-nspawn --quiet --boot --network-bridge=${BRIDGE} --directory=${MOUNT_}${TMPFS} -M ${TMPFS} --drop-capability=${DROP_CAP}
+##########################################################################################################################################################################################
+elif [[ ! -z ${ROOTFS} && ! -z ${OVERLAYFS} && ! -z ${TMPFS} ]];then
+if [[ ! -d ${ROOTFS_} ]];then usage 1 "rootfs doesnt exist";fi
+if [[ ! -d ${OVERLAYFS_} ]];then usage 1 "overlayfs doesnt exist";fi
+if [[ -d ${TMPFS_} ]];then usage 1 "tmpfs exists its called tmp for a reason";else mkdir ${TMPFS_};fi
+if [[ ! -d ${MOUNT_}${OVERLAYFS} ]];then mkdir ${MOUNT_}${OVERLAYFS};fi
+if [[ ! -d ${MOUNT_}${TMPFS} ]];then mkdir ${MOUNT_}${TMPFS};fi
+if [[ ! $(mount | grep ${MOUNT_}${OVERLAYFS}) ]];then unionfs -o allow_other,use_ino,suid,dev,nonempty -o cow ${OVERLAYFS_}=RO:${ROOTFS_}=RO ${MOUNT_}${OVERLAYFS};fi
+if [[ ! $(mount | grep ${MOUNT_}${TMPFS}) ]];then unionfs -o allow_other,use_ino,suid,dev,nonempty -o cow,max_files=33000 ${TMPFS_}=RW:${UNIONFS_}=RO ${MOUNT_}${TMPFS};fi
+/usr/bin/systemd-nspawn --quiet --boot --network-bridge=${BRIDGE} --directory=${MOUNT_}${TMPFS} -M ${TMPFS} --drop-capability=${DROP_CAP}
+##########################################################################################################################################################################################
+else usage 1 "no input";fi
+##########################################################################################################################################################################################

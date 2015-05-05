@@ -1,0 +1,11 @@
+#!/bin/env bash 
+
+systemctl stop nginx
+systemctl stop fcgiwrap.socket
+systemctl stop fcgiwrap.service
+
+systemctl status nginx
+systemctl status fcgiwrap.socket
+systemctl status fcgiwrap.service
+
+

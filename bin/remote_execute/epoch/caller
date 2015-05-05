@@ -1,0 +1,13 @@
+#!/bin/env bash
+
+timestamp=0
+trap "exit" INT
+while true;do
+ sleep 1
+  if [[ $(date +%s) -gt $timestamp ]];then
+    ./execute "true"
+    timestamp=$(($(date +%s)+60))
+  else
+    ./execute "false"
+  fi
+done

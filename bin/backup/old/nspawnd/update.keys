@@ -1,0 +1,13 @@
+#!/bin/env bash
+for i in `ls /mnt/container/rootfs/`; do
+  for o in spareproject admin;do
+    echo "" > /mnt/container/rootfs/${i}/home/${o}/.ssh/authorized_keys
+    if [[ ${o} == spareproject ]];then
+      cat /home/spareproject/.ssh/id_rsa.pub >> /mnt/container/rootfs/${i}/home/${o}/.ssh/authorized_keys
+      cat /home/admin/.ssh/id_rsa.pub >> /mnt/container/rootfs/${i}/home/${o}/.ssh/authorized_keys
+    fi
+    if [[ ${o} == admin ]];then
+      cat /home/admin/.ssh/id_rsa.pub >> /mnt/container/rootfs/${i}/home/${o}/.ssh/authorized_keys
+    fi
+  done
+done

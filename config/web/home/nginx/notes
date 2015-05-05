@@ -1,0 +1,70 @@
+
+your selecting a service from the ones i actually use
+(still forcing usable output regardless of how sloppy then merge the scripts with html/css out image. overlay. sshd. etc
+
+and passing a command start stop restart status
+
+
+input for container... redirects to either image or overlay
+
+input for system... only after index.cgi login
+
+input for index.cgi: session auth 
+
+
+
+
+fieldset
+button to take input or take input and show input...
+button generates a new timestamped cache 
+
+fieldset
+show timestamped cache - calling it monitor the basic heres the info box to get a wireframe
+
+image.cgi is taking image 
+overlay.cgi is taking image and overlay
+
+ssl_fieldset: i want to see if i can blag client side certs i really need a database sqlite is good but for expanding it didnt have one click add column / add row 
+which was annoying as i would loose data ive done sql before but the whole point of headerless was having remote tools?
+using ram is a no go it dies alot at the moment 
+
+session: the information i can stick in a database and filter, white/black list etc my udp tcp connection...
+
+auth: current users can spawn a sshd remote desktop or shell to login into can now spawn a fcgiwrap socket which is a shell but with the crypto'd
+comms that leave things open or refresh based on keys the "shit connection" mode 
+
+input no need on index.cgi its only taking login which is what really needs a database 
+
+
+
+
+
+
+system - what the host does / toggles / status, sshd,nginx,cgi.transmission,etc...
+container - currently whats on home page a monitor / control panel for images and nodes
+image - install / removal - config files,and the install scripts for them to work
+node - 
+
+
+
+
+erm so wtf apperently i have something i like the layout for
+
+just adding buttons / generating code but i would probably use it 
+how quick it would be to create a decent output even if its just trying to force a working version it loops alot and probably shouldnt
+but useability goes through the roof 
+
+good code shit usability bad crappy code really quick useable interface... : /
+
+
+
+
+very custom built for my current needs pretty useless otherwise quick visual output of a given container directory 
+takes the two inputs and displays things can upgrade this to whatever but mostly just the ease of a visual checkpoint of whats actually going on 
+
+
+
+
+
+
+

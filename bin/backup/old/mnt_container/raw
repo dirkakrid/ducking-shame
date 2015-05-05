@@ -1,0 +1,104 @@
+#!/bin/env bash
+##########################################################################################################################################################################################
+function usage {
+cat << EOF
+$0} - help
+-r rootfs
+-o overlayfs
+-s size of the image
+-u umount cryptsetup close 
+give it size it attempts to create, else it tries to mount
+EOF
+if [[ ${2} ]];then printf "%s\n" "${2}";fi
+exit ${1}
+}
+##########################################################################################################################################################################################
+#DEFAULTS
+HASH=sha512
+CIPHER=twofish-xts-plain64
+umask 077
+##########################################################################################################################################################################################
+while getopts 'r:o:s:uh' arg;do
+case "${arg}" in
+r)
+ROOTFS="${OPTARG}"
+ROOTFS_+="${ROOTFS}"
+;;
+o)
+OVERLAYFS="${ROOTFS}.${OPTARG}"
+OVERLAYFS_+="${OVERLAYFS}"
+;;
+s) 
+SIZE="${OPTARG}"
+;;
+u)
+UMOUNT="1"
+;;
+h) usage 0;;
+*) usage 1;;
+esac
+done
+##########################################################################################################################################################################################
+function debuggery {
+cat << EOF
+debuggery...
+EOF
+}
+##########################################################################################################################################################################################
+if [[ ! -z ${ROOTFS} && -z ${OVERLAYFS} && -z ${UMOUNT} ]];then
+  if [[ ! -z ${SIZE} ]];then
+    if [[ -d ${ROOTFS_} ]];then usage 1 "rootfs exists";fi          # naming conflict
+    if [[ -f ${RAWFS_}${ROOTFS} ]];then useage 1 "rawfs exists";fi  # overwrite
+    if [[ -f ${KEY_}${ROOTFS} ]];then usage 1 "key exists";fi       # overwrite
+    mkdir ${ROOTFS_}
+    qemu-img create -f raw ${RAWFS_}${ROOTFS} ${SIZE}
+    dd if=/dev/urandom bs=1 count=8192 | gpg --homedir ${GNUPG_} -e -r "container" > ${KEY_}${ROOTFS}
+    gpg --homedir ${GNUPG_} -d ${KEY_}${ROOTFS} 2>/dev/null 1>/tmp/${ROOTFS}
+    cryptsetup --hash=${HASH} --cipher=${CIPHER} --offset=0 --key-file=/tmp/${ROOTFS} open --type=plain ${RAWFS_}${ROOTFS} ${ROOTFS}
+    rm /tmp/${ROOTFS}    
+    mkfs.ext4 /dev/mapper/${ROOTFS}
+    mount /dev/mapper/${ROOTFS} ${ROOTFS_}
+  else 
+    if [[ ! -d ${ROOTFS_} ]];then mkdir ${ROOTFS_};fi
+    if [[ $(mount | grep ${ROOTFS_}) ]];then usage 1 "something already mounted on rootfs";fi
+    if [[ ! -f ${RAWFS_}${ROOTFS} ]];then usage 1 "rawfs doesnt exist";fi
+    if [[ ! -f ${KEY_}${ROOTFS} ]];then usage 1 "key doesnt exist";fi
+    gpg --homedir ${GNUPG_} -d ${KEY_}${ROOTFS} 2>/dev/null 1>/tmp/${ROOTFS}
+    cryptsetup --hash=${HASH} --cipher=${CIPHER} --offset=0 --key-file=/tmp/${ROOTFS} open --type=plain ${RAWFS_}${ROOTFS} ${ROOTFS}
+    rm /tmp/${ROOTFS}    
+    mount /dev/mapper/${ROOTFS} ${ROOTFS_}    
+  fi
+##########################################################################################################################################################################################
+elif [[ ! -z ${ROOTFS} && ! -z ${OVERLAYFS} && -z ${UMOUNT} ]];then
+  if [[ ! -z ${SIZE} ]];then 
+    if [[ -d ${OVERLAYFS_} ]];then usage 1 "overlayfs exists";fi
+    if [[ -f ${RAWFS_}${OVERLAYFS} ]];then usage 1 "rawfs exists";fi
+    if [[ -f ${KEY_}${OVERLAYFS} ]];then usage 1 "key exists";fi
+    mkdir ${OVERLAYFS_}
+    qemu-img create -f raw ${RAWFS_}${OVERLAYFS} ${SIZE}
+    dd if=/dev/urandom bs=1 count=8192 | gpg --homedir ${GNUPG_} -e -r "container" > ${KEY_}${OVERLAYFS}
+    gpg --homedir ${GNUPG_} -d ${KEY_}${OVERLAYFS} 2>/dev/null 1>/tmp/${OVERLAYFS}
+    cryptsetup --hash=${HASH} --cipher=${CIPHER} --offset=0 --key-file=/tmp/${OVERLAYFS} open --type=plain ${RAWFS_}${OVERLAYFS} ${OVERLAYFS}
+    rm /tmp/${OVERLAYFS}
+    mkfs.ext4 /dev/mapper/${OVERLAYFS}
+    mount /dev/mapper/${OVERLAYFS} ${OVERLAYFS_}
+  else
+    if [[ ! -d ${OVERLAYFS_} ]];then mkdir ${OVERLAYFS_};fi
+    if [[ $(mount | grep ${OVERLAYFS_}) ]];then usage 1 "something already mounted on overlayfs";fi
+    if [[ ! -f ${RAWFS_}${OVERLAYFS} ]];then usage 1 "rawfs doesnt exist";fi
+    if [[ ! -f ${KEY_}${OVERLAYFS} ]];then usage 1 "key doesnt exist";fi
+    gpg --homedir ${GNUPG_} -d ${KEY_}${OVERLAYFS} 2>/dev/null 1>/tmp/${OVERLAYFS}
+    cryptsetup --hash=${HASH} --cipher=${CIPHER} --offset=0 --key-file=/tmp/${OVERLAYFS} open --type=plain ${RAWFS_}${OVERLAYFS} ${OVERLAYFS}
+    rm /tmp/${OVERLAYFS}
+    mount /dev/mapper/${OVERLAYFS} ${OVERLAYFS_}
+  fi
+##########################################################################################################################################################################################
+elif [[ ! -z ${ROOTFS} && -z ${OVERLAYFS} && ! -z ${UMOUNT} ]];then
+  umount ${ROOTFS_}
+  cryptsetup close /dev/mapper/${ROOTFS}
+elif [[ ! -z ${ROOTFS} && ! -z ${OVERLAYFS} && ! -z ${UMOUNT} ]];then
+  umount ${OVERLAYFS_}
+  cryptsetup close /dev/mapper/${OVERLAYFS}
+##########################################################################################################################################################################################
+else usage 1 "no input";fi
+##########################################################################################################################################################################################

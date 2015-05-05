@@ -1,0 +1,97 @@
+#!/bin/bash
+##########################################################################################################################################################################################
+. /mnt/container/config.variables
+##########################################################################################################################################################################################
+function sudo(){
+DEFAULT="sudo"
+DEFAULT_DIR="./config/sudo"
+pacman -r ${ROOTFS} -Syu ${DEFAULT}
+cp -af ${DEFAULT_DIR}/* ${ROOTFS}
+chroot ${ROOTFS} chmod -R 700 /etc/sudoers
+chroot ${ROOTFS} chmod -R 700 /etc/sudoers.d
+chroot ${ROOTFS} useradd -g wheel -s /bin/bash admin
+ADMIN=`cat /dev/random | fold -w 1024 | head -n 1 | sha512sum | sed -r 's/...$//'`
+sed -i "s/admin:\!/admin:\$6\$rounds=65536\$$ADMIN/g" ${ROOTFS}/etc/shadow
+unset ADMIN
+ssh-keygen -t rsa -b 4096 -f ${ROOTFS}/home/admin/sshd/ssh_host_rsa_key -N ""
+ssh-keygen -t rsa -b 4096 -C "admin@container" -f ${ROOTFS}/home/admin/.ssh/id_rsa -N ""
+cat /home/admin/.ssh/id_rsa.pub >> ${ROOTFS}/home/admin/.ssh/authorized_keys
+chroot ${ROOTFS} chown -R admin:wheel /home/admin
+chroot ${ROOTFS} chmod -R 700 /home/admin
+chroot ${ROOTFS} systemctl enable sshd-admin.service
+}
+##########################################################################################################################################################################################
+function rdp() {
+RDP="xorg-xauth dwm dmenu xterm"
+RDP_DIR="./config/rdp"
+pacman -r ${ROOTFS} pacman -Syu ${RDP}
+cp -af ${RDP_DIR}/* ${ROOTFS}
+chown -R spareproject:users ${ROOTFS}/home/spareproject/
+chmod -R 700 ${ROOTFS}/home/spareproject
+}
+function desktop() {
+DESKTOP="terminator chromium weechat feh conky"
+DESKTOP_DIR="./config/desktop"
+pacman -r ${ROOTFS} pacman -Syu ${DESKTOP}
+cp -af ${DESKTOP_DIR}/* ${ROOTFS}
+}
+##########################################################################################################################################################################################
+function dev() {
+DEV="base-devel abs arch-install-scripts xmlto docbook-xml inetutils bc"
+DEV_DIR="./config/dev"
+pacman -r ${ROOTFS} pacman -Syu ${DEV}
+}
+##########################################################################################################################################################################################
+function web() {
+WEB="nginx fcgiwrap"
+WEB_DIR="./config/web"
+pacman -r ${ROOTFS}  pacman -Syu ${WEB}
+cp -af ${WEB_DIR}/* ${ROOTFS}
+
+chroot ${ROOTFS} groupadd nginx
+chroot ${ROOTFS} groupadd cgi
+chroot ${ROOTFS} useradd -g nginx -s /bin/false nginx
+chroot ${ROOTFS} useradd -g cgi -s /bin/false cgi
+chroot ${ROOTFS} gpasswd -a cgi nginx
+chroot ${ROOTFS} gpasswd -a nginx cgi
+#openssl genrsa -des3 -out ${INSTALL_DIR}/home/nginx/keys/server.key 4096
+#openssl req -new -key ${INSTALL_DIR}/home/nginx/keys/server.key -out /home/nginx/keys/server.csr
+#cp ${INSTALL_DIR}/home/nginx/keys/server.key ${INSTALL_DIR}/home/nginx/keys/server.key.org
+#openssl rsa -in ${INSTALL_DIR}/home/nginx/keys/server.key.org -out ${INSTALL_DIR}/home/nginx/keys/server.key
+#openssl x509 -req -days 365 -in ${INSTALL_DIR}/home/nginx/keys/server.csr -signkey ${INSTALL_DIR}/home/nginx/keys/server.key -out ${INSTALL_DIR}/home/nginx/keys/server.crt
+chroot ${ROOTFS} chown -R nginx:nginx /home/nginx
+chroot ${ROOTFS} chown -R nginx:nginx /var/lib/nginx
+chroot ${ROOTFS} chown -R cgi:cgi /home/nginx/webpanel/cgi-bin
+chroot ${ROOTFS} chmod -R 750 /home/nginx
+chroot ${ROOTFS} systemctl enable nginx.service
+chroot ${ROOTFS} systemctl enable fcgiwrap.socket
+}
+##########################################################################################################################################################################################
+function dns() {
+  DNS="unbound expat dnscrypt-proxy tor torsocks dnsutils"
+  DNS_DIR="./config/dns"
+  pacman -r ${ROOTFS} -Syu ${DNS}
+  cp -af ${DNS_DIR}/* ${ROOTFS}
+  chroot ${ROOTFS} systemctl enable unbound.service
+  chroot ${ROOTFS} systemctl enable dnscrypt-proxy.service
+  chroot ${ROOTFS} chown -R unbound:unbound /etc/unbound/keys
+}
+
+function tor() {
+  TOR="tor torsocks"
+  TOR_DIR="./config/tor"
+  pacman -r ${ROOTFS} -Syu ${TOR}
+  cp -af ${TOR_DIR}/* ${ROOTFS}
+}
+#########################################################################################################################################################################################
+
+default
+sudo
+#dev
+#tor
+#dns
+#rdp
+#web
+#router
+
+
